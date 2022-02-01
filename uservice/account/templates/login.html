@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="shortcut icon" href="#">
+    <link href="{% static 'css/bootstrap_css.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="frame">
+        <div class="nav">
+            <ul>
+                <li>Existing User</li>
+            </ul>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="username">username</label>
+            <input class="form-styling" type="text" id="username" placeholder="" name="username"/>
+            <label for="password">Password</label>
+            <input class="form-styling" type="password" id="password" placeholder="" name="password"/>
+            <input class="btn-animate" type="submit" value="Login to your account"/>
+        </form>
+        {% for message in messages %}
+            <p id="messages" style="text-align: center;">{{message}}</p>
+        {% endfor %}
+
+        <div style="text-align: center;">Don't have an account?<a href="{% url 'account:register' %}" type="link"><strong>Sign Up</strong></a></div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap_js.js' %}"></script>
+</body>
+</html>
