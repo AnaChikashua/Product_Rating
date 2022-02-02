@@ -5,15 +5,14 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from .models import Category, Photo
+from .models import Category, Photo, Post
 from django.contrib.auth.decorators import login_required
+from nltk.sentiment import SentimentIntensityAnalyzer
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, PostForm
 
 
-# Create your views here.
 def register_page(request):
-
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse_lazy('account:gallery'))
     else:
@@ -66,16 +65,44 @@ def gallery(request):
     else:
         photos = Photo.objects.filter(
             category__name=category, category__user=user)
-
+    photo_scores = {}
+    for photo in photos:
+        posts = Post.objects.filter(photo=photo).order_by('-date_posted').all()
+        sia = SentimentIntensityAnalyzer()
+        scores = {'negative': 0, 'positive': 0, 'neutral': 0}
+        for post in posts:
+            score = sia.polarity_scores(str(post))
+            maximum = max(score['neg'], score['neu'], score['pos'])
+            if maximum == score['neg']:
+                scores['negative'] += 1
+            if maximum == score['neu']:
+                scores['neutral'] += 1
+            if maximum == score['pos']:
+                scores['positive'] += 1
+        if photo.id not in photo_scores.keys():
+            photo_scores[photo.id] = scores
     categories = Category.objects.filter(user=user)
-    context = {'categories': categories, 'photos': photos}
+    context = {'categories': categories, 'photos': photos, 'scores': photo_scores}
     return render(request, 'gallery.html', context)
 
 
 @login_required(login_url='account:login')
 def viewPhoto(request, pk):
     photo = Photo.objects.get(id=pk)
-    return render(request, 'photo.html', {'photo': photo})
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.photo = photo
+            post.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = PostForm()
+    posts = Post.objects.filter(photo=photo).order_by('-date_posted').all()
+
+    context = {'form': form, 'posts': posts, 'photo': photo}
+    return render(request, 'photo.html', context)
 
 
 @login_required(login_url='login')

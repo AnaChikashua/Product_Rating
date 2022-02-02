@@ -2,8 +2,17 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
-
+import nltk
+nltk.download([
+     "names",
+     "stopwords",
+     "state_union",
+     "twitter_samples",
+     "movie_reviews",
+     "averaged_perceptron_tagger",
+     "vader_lexicon",
+     "punkt",
+ ])
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uservice.settings')

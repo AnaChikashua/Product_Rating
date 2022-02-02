@@ -65,6 +65,13 @@
 
                             <div class="card-body">
                                 <small>Category: {{photo.category.name}}</small>
+                                {% for photo_score, value in scores.items %}
+                                    {% if photo_score == photo.id %}
+                                        <p style="display: inline">🙂</p> {{value.positive}}
+                                        <p style="display: inline">☹</p> {{value.negative}}
+                                        <p style="display: inline">😐</p> {{value.neutral}}
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                             <a href="{% url 'account:photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>

@@ -30,3 +30,14 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Post(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True)
+    photo = models.ForeignKey(Photo, on_delete=models.Case, null=True, blank=True)
+    text = models.CharField(max_length=225)
+    date_posted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
