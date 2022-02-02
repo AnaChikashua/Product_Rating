@@ -100,8 +100,18 @@ def viewPhoto(request, pk):
     else:
         form = PostForm()
     posts = Post.objects.filter(photo=photo).order_by('-date_posted').all()
-
-    context = {'form': form, 'posts': posts, 'photo': photo}
+    sia = SentimentIntensityAnalyzer()
+    post_score = {}
+    for post in posts:
+        score = sia.polarity_scores(str(post))
+        maximum = max(score['neg'], score['neu'], score['pos'])
+        if maximum == score['neg']:
+            post_score[post.id] = -1
+        if maximum == score['neu']:
+            post_score[post.id] = 0
+        if maximum == score['pos']:
+            post_score[post.id] = 1
+    context = {'form': form, 'posts': posts, 'photo': photo, 'post_score': post_score}
     return render(request, 'photo.html', context)
 
 

@@ -6,12 +6,13 @@
     <title>register</title>
     <link rel="shortcut icon" href="#">
     <link href="{% static 'css/bootstrap_css.css' %}" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">
     <div class="frame">
         <div class="nav">
-            <h2 style="text-align: center">New User</h2>
+            <h2 style="text-align: center; color: whitesmoke">New User</h2>
         </div>
         <form action="" method="post">
             {% csrf_token %}
@@ -29,9 +30,11 @@
                    value="{{ form.password2.value|default_if_none:'' }}"/>
             <input class="btn btn-animate" type="submit" name="Create User" value="Create User"/>
         </form>
+
         <div style="text-align: center;">Already have an account?<a href="{% url 'account:login' %}"
                                                                     type="link"><strong>Login</strong></a>
         </div>
+
         <div style="text-align: center;">
             {% if form.errors %}
             {% for field in form %}

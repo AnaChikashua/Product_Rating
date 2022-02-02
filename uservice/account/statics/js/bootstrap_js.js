@@ -30,3 +30,12 @@ $(".btn-goback").toggleClass("btn-goback-up");
 $(".forgot").toggleClass("forgot-fade");
 });
 });
+
+function myFunction() {
+  var x = document.getElementById("password_toggle");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}

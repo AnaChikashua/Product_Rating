@@ -11,21 +11,24 @@
 <div class="container">
     <div class="frame">
         <div class="nav">
-            <h2 style="text-align: center">Existing User</h2>
+            <h2 style="text-align: center; color: whitesmoke">Existing User</h2>
         </div>
         <form action="" method="post">
             {% csrf_token %}
             <label for="username">username</label>
             <input class="form-styling" type="text" id="username" placeholder="" name="username"/>
-            <label for="password">Password</label>
-            <input class="form-styling" type="password" id="password" placeholder="" name="password"/>
-            <input class="btn-animate" type="submit" value="Login to your account"/>
+            <label for="password_toggle">Password</label>
+            <input class="form-styling" type="password" id="password_toggle" placeholder="" name="password"/>
+            <input type="checkbox" onclick="myFunction()" id="showpass">
+            <label for="showpass"></label>
+            <input class="btn btn-animate" type="submit" value="Login to your account"/>
         </form>
         {% for message in messages %}
-            <p id="messages" style="text-align: center;">{{message}}</p>
+        <p id="messages" style="text-align: center;">{{message}}</p>
         {% endfor %}
 
-        <div style="text-align: center;">Don't have an account?<a href="{% url 'account:register' %}" type="link"><strong>Sign Up</strong></a></div>
+        <div style="text-align: center;">Don't have an account?<a href="{% url 'account:register' %}"
+                                                                  type="link"><strong>Sign Up</strong></a></div>
 
     </div>
 </div>
