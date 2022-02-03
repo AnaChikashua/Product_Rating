@@ -222,8 +222,8 @@ textarea:focus {
 [type="checkbox"]:not(:checked)+label,
 [type="checkbox"]:checked+label {
     position: relative;
-    padding-left: 85px;
-    padding-top: 2px;
+    padding-left: 220px;
+    padding-top: 4px;
     cursor: pointer;
     margin-top: 8px
 }
@@ -242,7 +242,7 @@ textarea:focus {
     height: 30px;
     background: rgba(255, 255, 255, .2);
     border-radius: 15px;
-    left: 0;
+    right: 0;
     top: -3px;
     transition: all .2s ease
 }
@@ -254,7 +254,7 @@ textarea:focus {
     background: rgba(255, 255, 255, .7);
     border-radius: 50%;
     top: 7px;
-    left: 10px;
+    right: 10px;
     transition: all .2s ease
 }
 
@@ -265,7 +265,7 @@ textarea:focus {
 [type="checkbox"]:checked+label:after {
     background: #ffffff;
     top: 7px;
-    left: 45px
+    right: 45px
 }
 
 [type="checkbox"]:checked+label .ui,

@@ -14,24 +14,25 @@
         <div class="nav">
             <h2 style="text-align: center; color: whitesmoke">New User</h2>
         </div>
-        <form action="" method="post">
+        <form action="" method="post" style="padding: 30px;">
             {% csrf_token %}
             <label for="username">{{ form.username.label }}</label>
-            <input class="form-styling" placeholder="" type="text" id="username" name="{{ form.username.name }}"
+            <input class="form-styling" style="color: white" placeholder="" type="text" id="username" name="{{ form.username.name }}"
                    value="{{ form.username.value|default_if_none:'' }}"/>
             <label for="email">{{ form.email.label }}</label>
-            <input class="form-styling" type="email" id="email" placeholder="" name="{{ form.email.name }}"
+            <input class="form-styling" style="color: white" type="email" id="email" placeholder="" name="{{ form.email.name }}"
                    value="{{ form.email.value|default_if_none:'' }}"/>
             <label for="password1">{{ form.password1.label }}</label>
-            <input class="form-styling" type="password" id="password1" placeholder="" name="{{ form.password1.name }}"
+            <input class="form-styling" style="color: white" type="password" id="password1" placeholder="" name="{{ form.password1.name }}"
                    value="{{ form.password1.value|default_if_none:'' }}"/>
             <label for="password2">{{ form.password2.label }}</label>
-            <input class="form-styling" type="password" id="password2" placeholder="" name="{{ form.password2.name }}"
+            <input class="form-styling" style="color: white" type="password" id="password2" placeholder="" name="{{ form.password2.name }}"
                    value="{{ form.password2.value|default_if_none:'' }}"/>
             <input class="btn btn-animate" type="submit" name="Create User" value="Create User"/>
+            <div>&nbsp;</div>
         </form>
 
-        <div style="text-align: center;">Already have an account?<a href="{% url 'account:login' %}"
+        <div style="text-align: center;color: white">Already have an account?<a href="{% url 'account:login' %}"
                                                                     type="link"><strong>Login</strong></a>
         </div>
 
