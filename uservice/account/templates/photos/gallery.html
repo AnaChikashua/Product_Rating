@@ -63,7 +63,7 @@
                     {% for photo in photos %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+                            <img class="image-thumbail hover-shadow" src="{{photo.image.url}}" alt="Card image cap" onclick="window.location.href='{% url 'account:photo' photo.id %}';">
 
                             <div class="card-body">
                                 <small>Category: {{photo.category.name}}</small>

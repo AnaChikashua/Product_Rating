@@ -42,21 +42,21 @@
                                     {% for key, value in post_score.items %}
                                         {% if key == post.id %}
                                         {% if value == 1 %}
-                                            <p style="color:lightgreen;">
+                                            <p class="positive">
                                                 <strong>{{ post.user.username }}</strong>
                                                 <small>{{ post.date_posted|naturaltime }}</small>
                                                 <br>
                                                 {{ post.text }}
                                             </p>
                                         {% elif value == 0 %}
-                                        <p style="color: yellow">
+                                        <p class="neutral">
                                                 <strong>{{ post.user.username }}</strong>
                                                 <small>{{ post.date_posted|naturaltime }}</small>
                                                 <br>
                                                 {{ post.text }}
                                             </p>
                                         {% elif value == -1 %}
-                                        <p style="color: indianred">
+                                        <p class="negative">
                                                 <strong>{{ post.user.username }}</strong>
                                                 <small>{{ post.date_posted|naturaltime }}</small>
                                                 <br>
